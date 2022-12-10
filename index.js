@@ -1,71 +1,40 @@
 function hasTargetSum(array, target) {
-  if (array.length < 2) {
-    return false;
-  }
-  array = array.sort((a, b) => a - b);
-
-  let start = 0;
-  let end = array.length - 1;
-  while (start < end) {
-    let sum = array[start] + array[end];
-
-    if (sum === target) {
-      return true;
-    }
-
-    if (sum < target) {
-      start++;
-    } else {
-      end--;
+  // Write your algorithm here
+  for (let i = 0; i < array.length; i++) {
+    const otherNumber = target - array[i];
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[j] === otherNumber) {
+        return true;
+      }
     }
   }
-
   return false;
 }
 
 /* 
   Write the Big O time complexity of your function here
-  O(n * log(n)), where n is the length of the array.
-  This is because the function sorts the array in ascending order using the Array.prototype.sort() method, 
-  which has a time complexity of O(n * log(n)). Then, it iterates over the sorted array using two pointers,
-  which has a time complexity of O(n), as the pointers will move towards each other at most n times. 
-  The overall time complexity of the function is the time complexity of sorting the array plus the time 
-  complexity of iterating over the sorted array, 
-  which is O(n * log(n)) + O(n) = O(n * log(n)).
+  O(n^2), 
+  since it contains two nested for loops that each iterate through the elements of the array.
+  
 */
 
 /* 
   Add your pseudocode here
   function hasTargetSum(array, target) {
-  // Return false if the array has fewer than 2 elements
-  if (array.length < 2) {
-    return false;
-  }
-
-  // Sort the array in ascending order
-  array = array.sort((a, b) => a - b);
-
-  // Use two pointers to iterate over the sorted array
-  let start = 0;
-  let end = array.length - 1;
-  while (start < end) {
-    // Calculate the sum of the elements at the pointers
-    let sum = array[start] + array[end];
-
-    // Return true if the sum is equal to the target
-    if (sum === target) {
-      return true;
-    }
-
-    // Move the pointers towards each other
-    if (sum < target) {
-      start++;
-    } else {
-      end--;
+  // Iterate through each element in the array
+  for (let i = 0; i < array.length; i++) {
+    // Calculate the number we need to reach the target sum
+    const otherNumber = target - array[i];
+    // Iterate through the remaining elements in the array
+    for (let j = i + 1; j < array.length; j++) {
+      // If we find a matching element, return true
+      if (array[j] === otherNumber) {
+        return true;
+      }
     }
   }
-
-  // Return false if the for loop has completed without returning true
+  // If we reach this point, no matching elements were found
+  // so we return false
   return false;
 }
 
@@ -73,15 +42,13 @@ function hasTargetSum(array, target) {
 
 /*
   Add written explanation of your solution here
-    hasTargetSum() function takes an array and a target value as arguments, 
-    and returns true if at least one pair of elements in the array has a sum of the target value.
-    It first checks if the array has fewer than 2 elements, and if so, it returns false. 
-    Then, it sorts the array in ascending order, using the Array.prototype.sort() method. 
-    Next, it uses two pointers to iterate over the sorted array,
-    calculating the sum of the elements at the pointers and moving the pointers towards each other 
-    until the sum is equal to the target or the pointers meet.
-    Finally, it returns true if the for loop has completed without returning true,
-    indicating that no pair of elements in the array has a sum of the target value.
+   The hasTargetSum function takes in an array of numbers and a target sum as its arguments.
+   It iterates through each element in the array, and for each element,
+   it calculates the number that would need to be added to that element to reach the target sum.
+   Then it iterates through the remaining elements in the array to see if any of them match the number calculated in the previous step. 
+   If a matching element is found, the function returns true. 
+   If the function reaches the end of the array without finding a matching element, 
+   it returns false.
 */
 
 // You can run `node index.js` to view these console logs
